@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <title>AI Cover Letter Generator</title>
+  <style>
+    *{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+	margin:auto;
+    }
+    
+    .container{
+    width:370px;
+    border:2px solid black;
+    border-radius: 10px;
+    text-align: center;
+	margin-top:30px;
+    }
+    
+    .para{
+    margin-top:10px;
+    }
+    
+    input{
+    width:80%;
+    height:30px;
+    margin-top:15px;
+    border-radius:5px;
+    padding:0px 10px;
+    }
+    
+    textarea{
+    width:80%;
+    padding:0px 10px;
+    border-radius:5px;
+    margin-top:15px;
+    resize: none;
+    height: 60px;
+    }
+    
+    button {
+  width: 80%;
+  padding: 10px;
+  background: #1d2671;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin:10px;
+  }
+    button:hover {
+  background: #162056;
+  }
+
+  #output {
+  height: 180px;
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>AI Cover Letter Generator</h1>
+  <p class="para">Create a professional cover letter in seconds</p>
+  <form id="coverForm">
+    <input type="text" id="name" placeholder="Your Name" required />
+    <input type="text" id="role" placeholder="Job Role" required />
+    <input type="text" id="company" placeholder="Company Name" required />
+    <textarea id="skills" placeholder="Your Key Skills" required></textarea>
+    <button type="submit" id="skills">Generate Cover Letter</button>
+    </form>
+  
+  <div class="output-box">
+      <textarea id="output" readonly placeholder="Your AI-generated cover letter will appear here..."></textarea>
+      <button onclick="copyText()">Copy to Clipboard</button>
+    </div>
+  </div>
+</body>
+
+<script>
+const form = document.getElementById("coverForm");
+const output = document.getElementById("output");
+
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const role = document.getElementById("role").value;
+  const company = document.getElementById("company").value;
+  const skills = document.getElementById("skills").value;
+
+  const letter = mockAIGenerator(name, role, company, skills);
+  output.value = letter;
+   form.reset()
+});
+
+function mockAIGenerator(name, role, company, skills) {
+  return `Dear Hiring Manager at ${company},
+
+I am writing to express my interest in the ${role} position. My name is ${name}, and I bring strong expertise in ${skills}.
+
+I am passionate about delivering high-quality work and continuously improving my skills. I believe my abilities align well with your team’s goals, and I would love the opportunity to contribute to ${company}'s success.
+
+Thank you for considering my application.
+
+Sincerely,  
+${name}`;
+}
+
+function copyText() {
+  output.select();
+  document.execCommand("copy");
+  alert("Cover letter copied to clipboard!");
+}
+
+</script>
+</html>
